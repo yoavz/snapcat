@@ -20,17 +20,46 @@ body {
     -moz-border-radius: 75px;
     -khtml-border-radius: 75px;
     -webkit-border-radius: 75px;
+    
+}
+
+.instructions {
+    margin: 15px auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    width: 50%;
 }
 
 .username {
     margin: 0 auto;
-    width: 30%;
+    width: 50%;
 }
 
 .username-input {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 600;
     font-size: 18px;
+}
+
+.subscribe {
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    background: #000000;
+    font-size: 23px;
+    font-weight: 600;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+    color: #FFFC00;
+
+    margin: 15px;
+}
+
+.subscribe:hover {
+    background: #4d4d4d;
+    color: #FFFC00;
 }
 
 /* footer bullshit */
