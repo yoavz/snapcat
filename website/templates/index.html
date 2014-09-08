@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="instructions">
+         1. ENTER YOUR SNAPCHAT USERNAME
+        <br>
+         2. GET DAILY SNAPCHATS OF CATS
+        <br>
+         3. ???
+    </div>
+    <div class="input-group username">
+        <input type="text" class="form-control username-input" placeholder="Snapchat username" name="username" id="username">
+    </div>
+    <div>
+        <button id="subscribe" class="btn subscribe">SUBSCRIBE</button>
+        <div id="response-message"></div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <ul>
+        <li id="ghost"><a href="/"></a></li>
+        <li><a href="about">ABOUT</a></li>
+        <li><a href="unsubscribe">UNSUBSCRIBE</a></li>
+        <li><a href="http://snapchat.com">SNAPCHAT</a></li>
+    </ul>
+{% endblock %}

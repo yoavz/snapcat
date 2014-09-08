@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Snapcat</title>
+
+        <link rel="stylesheet" 
+              href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" 
+              href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="shortcut icon" 
+              href="{{ url_for('static', filename='favicon.ico') }}">
+
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}">
+        </script>
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <img id="snapcat-title" src="{{ url_for('static', filename='pics/snapcat_black.png') }}"></img>
+            {% block body %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            {% block footer %}
+            {% endblock %}
+        </div>
+    </body>
+
+    <script type="text/javascript">
+
+        function displayMessage(msg) {
+            $("#response-message").hide();
+            $("#response-message").text(msg.toUpperCase());
+            setTimeout(function(){
+                $("#response-message").fadeIn();
+            }, 500);
+        };
+
+        $("#subscribe").click(function() {
+            var username = $("#username").val();
+            $("#subscribe").fadeOut();
+            $.ajax({
+                type: "POST",
+                url: "/subscribe",
+                data: {"username": username},
+                success: function(data) {
+                    console.log(data['msg'])
+                    displayMessage(data['msg']);
+                }
+            });
+        });
+
+        $("#unsubscribe").click(function() {
+            var username = $("#username").val();
+            $("#unsubscribe").fadeOut();
+            $.ajax({
+                type: "POST",
+                url: "/unsubscribe",
+                data: {"username": username},
+                success: function(data) {
+                    console.log(data['msg'])
+                    displayMessage(data['msg']);
+                }
+            });
+        });
+    </script>
+
+</html>
