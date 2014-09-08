@@ -2,7 +2,7 @@ import sqlite3
 
 class SnapcatDB(object):
     def __init__(self):
-        self.conn = sqlite3.connect('snapcat.db', check_same_thread=False)
+        self.conn = sqlite3.connect('../data/snapcat.db', check_same_thread=False)
         self.cursor = self.conn.cursor()
     
     def username_exists(self, username):
