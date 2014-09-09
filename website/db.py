@@ -1,4 +1,6 @@
 import sqlite3
+from flask import current_app
+
 import config
 
 class SnapcatDB(object):
@@ -11,11 +13,13 @@ class SnapcatDB(object):
             self.cursor.execute("INSERT INTO usernames(username) VALUES (?)", (username,))
             self.conn.commit()
         except sqlite3.IntegrityError:
+            current_app.logger.info("{} attempted to resubscribe".format(username))
             return "Username already subscribed"
         except Exception as e:
-            print e, type(e)
+            current_app.logger.error(e)
             return "Something went wrong" 
 
+        current_app.logger.info("Subscribed {}".format(username))
         return "Successfully subscribed" 
 
     def remove_username(self, username):
@@ -23,7 +27,8 @@ class SnapcatDB(object):
             self.cursor.execute("DELETE FROM usernames WHERE username = ?", (username,))
             self.conn.commit()
         except Exception as e:
-            print e, type(e)
+            current_app.logger.error(e)
             return "Something went wrong"
 
+        current_app.logger.info("Unsubscribed {}".format(username))
         return "Successfully unsubscribed"

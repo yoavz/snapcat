@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db import SnapcatDB
+import logging
+
+import config
 
 MAX_USERNAME_LEN = 50 
 
@@ -39,10 +42,22 @@ def unsubscribe():
     else:
         return render_template('unsubscribe.html') 
 
-
-def subscribe_db(username):
-    return app.db.add_username(username)
-
 if __name__ == '__main__':
+    # initialize db
     app.db = SnapcatDB()
-    app.run(port=8080, debug=True)
+
+    # set up logging
+    from logging.handlers import RotatingFileHandler
+    from logging import Formatter
+    filename = config.LOG_PREFIX + '.log'
+    file_handler = RotatingFileHandler(filename)
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(Formatter(
+        '%(asctime)s %(levelname)s: %(message)s '
+    ))
+    app.logger.addHandler(file_handler)
+    app.logger.setLevel(logging.INFO)
+
+    import sys
+    debug_mode = True if len(sys.argv) > 1 else False
+    app.run(port=8080, debug=debug_mode)
