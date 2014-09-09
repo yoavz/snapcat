@@ -1,8 +1,9 @@
 import sqlite3
+import config
 
 class SnapcatDB(object):
     def __init__(self):
-        self.conn = sqlite3.connect('../data/snapcat.db', check_same_thread=False)
+        self.conn = sqlite3.connect(config.SNAPCAT_DB, check_same_thread=False)
         self.cursor = self.conn.cursor()
     
     def add_username(self, username):
