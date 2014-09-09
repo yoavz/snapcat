@@ -1,5 +1,5 @@
 # Which subdirectory to look for pictures in
-PIC_DIRECTORY = '../data'
+PIC_DIRECTORY = '../data/pics'
 
 # Accounts to try logging in with!
 ACCOUNTS = [
