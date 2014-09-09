@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db import SnapcatDB
 
-MAX_USERNAME_LEN = 255
+MAX_USERNAME_LEN = 50 
 
 app = Flask(__name__)
 
@@ -17,17 +17,11 @@ def about():
 def subscribe():
     if request.method == 'POST':
         username = request.form['username']
-        print username
         if len(username) > MAX_USERNAME_LEN:
-            return jsonify({'msg': 'Username is too long'})
+            return jsonify({'msg': 'That username seems too long...'})
 
-        if app.db.add_username(username):
-            print 'success' 
-            return jsonify({'msg': 'Username successfully subscribed'})
-
-        else:
-            print 'fail' 
-            return jsonify({'msg': 'Something went wrong.'})
+        resp = app.db.add_username(username)
+        return jsonify({'msg': resp})
 
     else:
         return redirect(url_for('main'))
@@ -35,7 +29,13 @@ def subscribe():
 @app.route('/unsubscribe', methods=['GET', 'POST'])
 def unsubscribe():
     if request.method == 'POST':
-        pass
+        username = request.form['username']
+        if len(username) > MAX_USERNAME_LEN:
+            return jsonify({'msg': 'That username seems too long...'})
+
+        resp = app.db.remove_username(username)
+        return jsonify({'msg': resp})
+
     else:
         return render_template('unsubscribe.html') 
 

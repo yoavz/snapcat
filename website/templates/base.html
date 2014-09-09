@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <img id="snapcat-title" src="{{ url_for('static', filename='pics/snapcat_black.png') }}"></img>
+            <a href="/"><img id="snapcat-title" src="{{ url_for('static', filename='pics/snapcat_black.png') }}"></img></a>
             {% block body %}
             {% endblock %}
         </div>
@@ -28,11 +28,18 @@
 
     <script type="text/javascript">
 
-        function displayMessage(msg) {
+        // dirty but fuck it ship it
+        function displayMessage(msg, button) {
             $("#response-message").hide();
             $("#response-message").text(msg.toUpperCase());
             setTimeout(function(){
                 $("#response-message").fadeIn();
+                setTimeout(function(){
+                    $("#response-message").fadeOut();
+                    setTimeout(function(){
+                        $(button).fadeIn();
+                    }, 500);
+                }, 2000);
             }, 500);
         };
 
@@ -44,8 +51,7 @@
                 url: "/subscribe",
                 data: {"username": username},
                 success: function(data) {
-                    console.log(data['msg'])
-                    displayMessage(data['msg']);
+                    displayMessage(data['msg'], "#subscribe");
                 }
             });
         });
@@ -58,8 +64,7 @@
                 url: "/unsubscribe",
                 data: {"username": username},
                 success: function(data) {
-                    console.log(data['msg'])
-                    displayMessage(data['msg']);
+                    displayMessage(data['msg'], "#unsubscribe");
                 }
             });
         });
