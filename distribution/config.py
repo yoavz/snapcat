@@ -12,4 +12,4 @@ ACCOUNTS = [
 
 # If sending one picture to multiple people,
 # this is how many seconds you sleep between each
-SLEEPTIME = 5
+SLEEPTIME = 4
