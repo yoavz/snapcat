@@ -74,16 +74,19 @@ def send_image(username, recipients, filename, sleep_time=1):
 
     counter = 0
     for recip in recipients: 
-        resp = utils.send_img(username, auth_token, media_id, recip)
-        if resp.status_code != 200:
-            print 'Send error'
-            print resp 
-        else:
-            counter += 1
-            print '{}/{}: sent successfully to {}' .format(counter, len(recipients), recip)
+        recip_name = recip.get("name")
+        print recip_name
+        if recip_name:
+            resp = utils.send_img(username, auth_token, media_id, recip_name)
+            if resp.status_code != 200:
+                print 'Send error'
+                print resp 
+            else:
+                counter += 1
+                print '{}/{}: sent successfully to {}' .format(counter, len(recipients), recip)
 
-        if counter != len(recipients):
-            time.sleep(sleep_time)
+            if counter != len(recipients):
+                time.sleep(sleep_time)
 
 import argparse
 if __name__ == '__main__':

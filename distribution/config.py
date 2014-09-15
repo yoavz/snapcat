@@ -1,5 +1,8 @@
+#DATA_DIR = '../data'
+DATA_DIR = '/data'
+
 # Which subdirectory to look for pictures in
-PIC_DIRECTORY = '../data/pics'
+PIC_DIRECTORY = DATA_DIR + '/pics' 
 
 # Accounts to try logging in with!
 ACCOUNTS = [
