@@ -6,8 +6,6 @@
 DATA_FOLDER = '../data/'
 # where SQL database containing users is
 SNAPCAT_DB = DATA_FOLDER + 'snapcat.db'
-# where log file is
-LOG_PREFIX = 'snapcat'
 
 #############
 # PRODUCTION
@@ -15,4 +13,3 @@ LOG_PREFIX = 'snapcat'
 
 # DATA_FOLDER = '/data/'
 # SNAPCAT_DB = DATA_FOLDER + 'snapcat.db'
-# LOG_PREFIX = '/data/snapcat'

@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db import SnapcatDB
 import logging
 
-import config
-
 MAX_USERNAME_LEN = 50 
 
 app = Flask(__name__)
@@ -12,7 +10,7 @@ app.db = SnapcatDB()
 # set up logging
 from logging.handlers import RotatingFileHandler
 from logging import Formatter
-filename = config.LOG_PREFIX + '.log'
+filename = 'snapcat.log'
 file_handler = RotatingFileHandler(filename)
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(Formatter(
