@@ -41,6 +41,7 @@ if __name__ == '__main__':
 
     if recipients and images:
         chosen_image = random.choice(images)
+        print 'Using image: ' + chosen_image
         main.send_image(username, auth_token, recipients, chosen_image, sleep_time=config.SLEEPTIME)
     else:
         print 'Users and/or images not found'

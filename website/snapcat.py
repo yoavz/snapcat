@@ -31,6 +31,9 @@ def about():
 def subscribe():
     if request.method == 'POST':
         username = request.form['username']
+        if " " in username:
+            return jsonify({'msg': 'Username can\'t have spaces in it'})
+
         if len(username) > MAX_USERNAME_LEN:
             return jsonify({'msg': 'That username seems too long...'})
 
