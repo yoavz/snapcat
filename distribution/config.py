@@ -3,6 +3,7 @@ DATA_DIR = '/data'
 
 # Which subdirectory to look for pictures in
 PIC_DIRECTORY = DATA_DIR + '/pics' 
+DB_PATH = DATA_DIR + '/snapcat.db'
 
 # Accounts to try logging in with!
 ACCOUNTS = [

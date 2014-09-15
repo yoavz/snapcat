@@ -43,7 +43,7 @@ def choose_pic():
     return path
 
 
-def get_friend(user):
+def get_friends(user):
     username = user.get('username')
     friends = user.get('friends')
 
@@ -58,10 +58,10 @@ def get_friend(user):
         else:
             friend_index = raw_input("%d is not valid, please input a valid num: " % friend_index)
     
-    return friends[int(friend_index)]
+    return [f.get("name") for f in friends[int(friend_index)]]
 
 
-def send_image(username, recipients, filename, sleep_time=1):
+def send_image(username, auth_token, recipients, filename, sleep_time=1):
     media_id = '{user}~{uuid}'.format(user=username.upper(), uuid=str(uuid4()))
 
     resp = utils.upload_img(username, auth_token, media_id, filename)
@@ -74,19 +74,16 @@ def send_image(username, recipients, filename, sleep_time=1):
 
     counter = 0
     for recip in recipients: 
-        recip_name = recip.get("name")
-        print recip_name
-        if recip_name:
-            resp = utils.send_img(username, auth_token, media_id, recip_name)
-            if resp.status_code != 200:
-                print 'Send error'
-                print resp 
-            else:
-                counter += 1
-                print '{}/{}: sent successfully to {}' .format(counter, len(recipients), recip)
+        resp = utils.send_img(username, auth_token, media_id, recip)
+        if resp.status_code != 200:
+            print 'Send error'
+            print resp 
+        else:
+            counter += 1
+            print '{}/{}: sent successfully to {}' .format(counter, len(recipients), recip)
 
-            if counter != len(recipients):
-                time.sleep(sleep_time)
+        if counter != len(recipients):
+            time.sleep(sleep_time)
 
 import argparse
 if __name__ == '__main__':
@@ -101,5 +98,5 @@ if __name__ == '__main__':
     auth_token = user.get('auth_token')
 
     image_path = args.image if args.image else choose_pic()
-    recipients = args.recipients if args.recipients else [get_friend(user)]
-    send_image(username, recipients, image_path, config.SLEEPTIME)
+    recipients = args.recipients if args.recipients else get_friends(user) 
+    send_image(username, auth_token, recipients, image_path, config.SLEEPTIME)
